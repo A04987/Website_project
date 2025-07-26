@@ -1,0 +1,22 @@
+ body,html{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .parallax{
+            background-image: url("../Picture/Background1.png");
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .parallax2{
+            background-image: url('https://i.pinimg.com/736x/d7/70/e6/d770e64db82e4195458ee3eefacee4cb.jpg');
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+
+            background-repeat: no-repeat;
+        }
