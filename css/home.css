@@ -5,6 +5,20 @@
             scroll-behavior: smooth;
         }
 
+        
+        .CoolHome {
+    background-image: url("../Picture/Background1.png");
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+}
+
+  
+    
+
         .parallax{
             background-image: url("../Picture/Background1.png");
             height: 100vh;
@@ -28,14 +42,14 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ffffffcc; /* สีขาวโปร่งแสงเล็กน้อย */
+  background-color: #ffffffcc; 
   padding: 15px 30px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  backdrop-filter: blur(5px); /* ทำให้ดูโปรหรูขึ้น */
+  backdrop-filter: blur(5px);
 }
 
-/* เมนูแนวนอน */
+
 .navbar ul {
   list-style: none;
   display: flex;
@@ -44,7 +58,7 @@
   padding: 0;
 }
 
-/* ลิงก์เมนู */
+
 .navbar a {
   text-decoration: none;
   color: #333;
@@ -56,14 +70,22 @@
   color: #0077ff;
 }
 
-/* ปรับระยะห่างของเนื้อหาหลัก */
+
 main {
-  padding-top: 100px; /* เผื่อพื้นที่ให้ navbar */
+  padding-top: 100px;
 }
 
-/* สำหรับ section แต่ละส่วน */
+
 section {
   padding: 80px 30px;
   min-height: 100vh;
+}
+
+.HomePage{
+  border-radius: 20px;
+  background-color: white;
+  width:50%;
+  margin: auto;
+  text-align: center;
 }
         
