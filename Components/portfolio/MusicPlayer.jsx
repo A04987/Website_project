@@ -25,10 +25,10 @@ const PLAYLIST = [
     id: 1,
     title: "Cherry Blossom Dreams",
     artist: "Lo-Fi Anime",
-    cover: "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=200&h=200&fit=crop",
+    cover: "https://media.tenor.com/TyMkS_jWfL4AAAAe/kasane-teto-machine-love.png",
     // Replace with your actual audio URL
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    duration: "3:45",
+    audioUrl: "public/sounds/Machine-love-acoustic.mp3",
+    duration: "4:57",
   },
   {
     id: 2,
