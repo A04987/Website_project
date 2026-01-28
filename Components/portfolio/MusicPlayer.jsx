@@ -23,11 +23,11 @@ import {
 const PLAYLIST = [
   {
     id: 1,
-    title: "Cherry Blossom Dreams",
-    artist: "Lo-Fi Anime",
+    title: "Machine Love (Acoustic)",
+    artist: "Kasane Teto",
     cover: "https://media.tenor.com/TyMkS_jWfL4AAAAe/kasane-teto-machine-love.png",
     // Replace with your actual audio URL
-    audioUrl: "public/sounds/Machine-love-acoustic.mp3",
+    audioUrl: "../../public/sounds/Machine-love-acoustic.mp3",
     duration: "4:57",
   },
   {
@@ -84,21 +84,41 @@ export default function MusicPlayer({ isDark }) {
 
   const track = PLAYLIST[currentTrack];
 
+// --- ตัวแรก (จัดการระดับเสียง) ---
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = isMuted ? 0 : volume;
     }
   }, [volume, isMuted]);
 
+  // --- ตัวที่สอง (จัดการการเล่น/หยุด และเปลี่ยนเพลง) ---
   useEffect(() => {
     if (audioRef.current) {
+      // 1. ตรวจสอบก่อนว่าเพลงที่กำลังจะเล่น คือเพลงเดิมหรือเพลงใหม่
+      // โดยการเทียบ src ปัจจุบัน กับ src ของเพลงใน Playlist
+      const isSameTrack = audioRef.current.src.includes(track.audioUrl.replace('../../public', ''));
+
+      // 2. ถ้า "ไม่ใช่เพลงเดิม" (เช่น กด Next/Prev) ถึงจะสั่งโหลดใหม่
+      if (!isSameTrack) {
+        audioRef.current.load();
+      }
+
+      // 3. จัดการสถานะการเล่น
       if (isPlaying) {
-        audioRef.current.play().catch(() => setIsPlaying(false));
+        // ถ้าเป็นเพลงเดิม มันจะเล่นต่อจากวินาทีที่ค้างไว้ทันที
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.error("Playback failed:", error);
+            setIsPlaying(false);
+          });
+        }
       } else {
+        // สั่งหยุดเฉยๆ โดยไม่สั่ง load() จะทำให้ค่า currentTime ยังค้างอยู่ที่เดิม
         audioRef.current.pause();
       }
     }
-  }, [isPlaying, currentTrack]);
+  }, [isPlaying, currentTrack]); // ตรวจจับเมื่อกดเล่น/หยุด หรือเปลี่ยนเพลง
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
@@ -209,7 +229,7 @@ export default function MusicPlayer({ isDark }) {
                   <div className="relative">
                     {/* Spinning Vinyl Effect */}
                     <motion.div
-                      animate={isPlaying ? { rotate: 360 } : {}}
+                      
                       transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                       className="relative w-full aspect-square rounded-2xl overflow-hidden"
                     >
@@ -223,12 +243,7 @@ export default function MusicPlayer({ isDark }) {
                         isDark ? 'bg-purple-500/10' : 'bg-pink-500/10'
                       }`} />
                       
-                      {/* Center hole effect */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className={`w-8 h-8 rounded-full ${
-                          isDark ? 'bg-gray-900/80' : 'bg-white/80'
-                        } backdrop-blur-sm`} />
-                      </div>
+                      
                     </motion.div>
 
                     {/* Floating music notes */}
@@ -502,7 +517,7 @@ export default function MusicPlayer({ isDark }) {
           >
             {/* Mini Album Art */}
             <motion.div
-              animate={isPlaying && !isExpanded ? { rotate: 360 } : {}}
+              
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 relative"
             >

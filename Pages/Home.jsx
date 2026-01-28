@@ -172,7 +172,7 @@ function Home() {
         customBg={customBg} 
         setCustomBg={setCustomBg} 
       />
-
+      <MusicPlayer isDark={isDark} />
       {/* Footer */}
       <footer className={`relative z-10 text-center py-8 ${
         isDark ? 'text-gray-500' : 'text-gray-400'
